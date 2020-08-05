@@ -9,15 +9,15 @@ data "alicloud_vpcs" "default" {
 }
 
 module "service_sg_with_multi_cidr" {
-  source  = "alibaba/security-group/alicloud"
-  region  = var.region
+  source = "alibaba/security-group/alicloud"
+  region = var.region
 
   name        = "terraform-run-trigger-demo"
   description = "Security group for user-service with custom ports open within VPC"
   vpc_id      = data.alicloud_vpcs.default.ids.0
 
-  ingress_cidr_blocks      = ["10.10.0.0/16"]
-  ingress_rules            = ["https-443-tcp"]
+  ingress_cidr_blocks = ["10.10.0.0/16"]
+  ingress_rules       = ["https-443-tcp"]
   ingress_with_cidr_blocks = [
     {
       from_port   = 8080
@@ -37,7 +37,7 @@ module "service_sg_with_multi_cidr" {
       rule = "postgresql-tcp"
     },
   ]
-  egress_cidr_blocks      = ["10.10.0.0/16"]
+  egress_cidr_blocks = ["10.10.0.0/16"]
   egress_with_cidr_blocks = [
     {
       from_port   = 8080
